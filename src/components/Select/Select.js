@@ -6,9 +6,7 @@ import Icon from '../Icon';
 
 const Select = ({ label, value, children, ...delegated }) => {
   const childArray = React.Children.toArray(children);
-  const selectedChild = childArray.find(
-    (child) => child.props.value === value
-  );
+  const selectedChild = childArray.find((child) => child.props.value === value);
 
   const displayedValue = selectedChild.props.children;
 
@@ -21,18 +19,17 @@ const Select = ({ label, value, children, ...delegated }) => {
 
         <DisplayedBit>
           {displayedValue}
-          <ChevronIcon
-            id="chevron-down"
-            size={24}
-            strokeWidth={1.5}
-          />
+          <ChevronIcon id='chevron-down' size={24} strokeWidth={1.5} />
         </DisplayedBit>
       </SelectWrapper>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.label``;
+const Wrapper = styled.label`
+  display: flex;
+  align-items: center;
+`;
 
 const VisibleLabel = styled.span`
   color: ${COLORS.gray[700]};
@@ -56,7 +53,9 @@ const NativeSelect = styled.select`
 `;
 
 const DisplayedBit = styled.span`
-  display: block;
+  display: flex;
+  align-items: center;
+  height: 42px;
   background: ${COLORS.gray[100]};
   font-size: 1rem;
   font-weight: ${WEIGHTS.medium};
