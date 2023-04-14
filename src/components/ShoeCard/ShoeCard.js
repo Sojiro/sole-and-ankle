@@ -29,12 +29,31 @@ const ShoeCard = ({
     ? 'on-sale'
     : isNewShoe(releaseDate)
       ? 'new-release'
-      : 'default'
+      : 'default';
+
+  let variantBgColor = 'revert';
+  let variantText = '';
+  if (variant === 'on-sale') {
+    variantBgColor = COLORS.primary;
+    variantText = 'Sale';
+  } else if (variant === 'new-release') {
+    variantText = 'Just released!';
+    variantBgColor = COLORS.secondary;
+  }
 
   return (
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
         <ImageWrapper>
+          {variantText && (
+            <VariantTag
+              style={{
+                '--variant-color': variantBgColor,
+              }}
+            >
+              {variantText}
+            </VariantTag>
+          )}
           <Image alt='' src={imageSrc} />
         </ImageWrapper>
         <Spacer size={12} />
@@ -50,6 +69,22 @@ const ShoeCard = ({
   );
 };
 
+const VariantTag = styled.span`
+  position: absolute;
+  height: 32px;
+  width: fit-content;
+  right: -4px;
+  top: 3.24%;
+  padding: 7px 9px 9px 10px;
+  background-color: var(--variant-color);
+  color: ${COLORS.white};
+  border-radius: 2px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+`;
+
 const Link = styled.a`
   text-decoration: none;
   color: inherit;
@@ -58,7 +93,7 @@ const Link = styled.a`
 const Wrapper = styled.article``;
 
 const ImageWrapper = styled.div`
-  position: relative; 
+  position: relative;
 `;
 
 const Image = styled.img`
